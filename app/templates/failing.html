@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<title>Failing Nodes</title>
+<section class="content">
+    <h1>Failing</h1>
+    <tbody>
+        {% for key, value in failing.items() %}
+          <tr>
+            <td>Node Name: {{ key }}</td>
+            <br>
+            <td>Number of failing nodes: {{ value.failed_tests_count }}</td>
+            <br>
+            <td>Failures:
+                {% for failure in value.failed_tests_details %} 
+                {{ failure}}
+                <br>
+                <br>
+                {% endfor %}
+            </td>
+            <br>
+            <br>
+          </tr>
+        {% endfor %}
+      </tbody>
+</section>

@@ -1,0 +1,42 @@
+{
+    "nodes": {
+        "details": {
+            "pe-psql-70aefa-0.region-a.domain.com": {
+                "failed_tests_count": 0,
+                "passing_tests_count": 13,
+                "failed_tests_details": []
+            },
+            "pe-server-70aefa-0.region-a.domain.com": {
+                "failed_tests_count": 1,
+                "passing_tests_count": 30,
+                "failed_tests_details": [
+                    "S0022 Determines if there is a valid Puppet Enterprise license in place at /etc/puppetlabs/license.key on your primary which is not going to expire in the next 90 days"
+                ]
+            },
+            "pe-compiler-70aefa-0.region-a.domain.com": {
+                "failed_tests_count": 1,
+                "passing_tests_count": 23,
+                "failed_tests_details": [
+                    "S0022 Determines if there is a valid Puppet Enterprise license in place at /etc/puppetlabs/license.key on your primary which is not going to expire in the next 90 days"
+                ]
+            },
+            "pe-compiler222-70aefa-1.region-b.domain.com": {
+                "failed_tests_count": 0,
+                "passing_tests_count": 23,
+                "failed_tests_details": []
+            }
+        },
+        "failing": [
+            "pe-compiler-70aefa-0.region-a.domain.com",
+            "pe-server-70aefa-0.region-a.domain.com"
+        ],
+        "passing": [
+            "pe-compiler222-70aefa-1.region-b.domain.com",
+            "pe-psql-70aefa-0.region-a.domain.com"
+        ]
+    },
+    "errors": {},
+    "status": "failing",
+    "failing_node_count": 1,
+    "passing_node_count": 3
+}

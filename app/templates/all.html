@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<title>All Nodes</title>
+<section class="content">
+    <h1 style="color: rgb(77, 104, 132);">All Nodes</h1>
+    <table>
+        {% for key in failing_nodes %}
+          <tr>
+            <td style="color: red;">Node Name: {{ key }}</td>
+          </tr>
+        {% endfor %}
+        {% for key in passing_nodes %}
+            <tr>
+                <td style="color: green">Node Name: {{ key }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+</section>
