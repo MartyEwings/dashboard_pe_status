@@ -21,6 +21,32 @@
                 ]
             },
             "pe-compiler222-70aefa-1.region-b.domain.com": {
+                "failed_tests_count": 1,
+                "passing_tests_count": 23,
+                "failed_tests_details": []
+            },
+            "pe-compiler9-70aefa-0.region-a.domain.com": {
+                "failed_tests_count": 2,
+                "passing_tests_count": 23,
+                "failed_tests_details": [
+                    "S0007 Determines if there is at least 20% disk free on the PostgreSQL data partition",
+                    "S0012 Determines if Puppet produced a report during the last run interval."
+                ]
+            }
+            ,
+            "pe-server9-70aefa-0.region-a.domain.com": {
+                "failed_tests_count": 0,
+                "passing_tests_count": 23,
+                "failed_tests_details": []
+            }
+            ,
+            "pe-compiler123-70aefa-1.region-b.domain.com": {
+                "failed_tests_count": 0,
+                "passing_tests_count": 23,
+                "failed_tests_details": []
+            }
+            ,
+            "pe-psql123-70aefa-0.region-a.domain.com": {
                 "failed_tests_count": 0,
                 "passing_tests_count": 23,
                 "failed_tests_details": []
@@ -28,15 +54,19 @@
         },
         "failing": [
             "pe-compiler-70aefa-0.region-a.domain.com",
-            "pe-server-70aefa-0.region-a.domain.com"
+            "pe-server-70aefa-0.region-a.domain.com",
+            "pe-compiler9-70aefa-0.region-a.domain.com",
+            "pe-server9-70aefa-0.region-a.domain.com"
         ],
         "passing": [
             "pe-compiler222-70aefa-1.region-b.domain.com",
-            "pe-psql-70aefa-0.region-a.domain.com"
+            "pe-psql-70aefa-0.region-a.domain.com",
+            "pe-compiler123-70aefa-1.region-b.domain.com",
+            "pe-psql123-70aefa-0.region-a.domain.com"
         ]
     },
     "errors": {},
     "status": "failing",
-    "failing_node_count": 1,
-    "passing_node_count": 3
+    "failing_node_count": 4,
+    "passing_node_count": 4
 }

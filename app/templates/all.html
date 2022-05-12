@@ -1,19 +1,48 @@
 <!DOCTYPE html>
-<title>All Nodes</title>
-<section class="content">
-    
-    <h1 style="color: rgb(77, 104, 132);">All Nodes</h1>
-    <table>
-        {% for key in failing_nodes %}
-          <tr>
-            <td style="color: red;">Node Name: {{ key }}</td>
-          </tr>
-        {% endfor %}
-        {% for key in passing_nodes %}
-            <tr>
-                <td style="color: green">Node Name: {{ key }}</td>
-            </tr>
-        {% endfor %}
-        </table>
-</section>
 
+<head>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    </script>
+</head>
+<div class="container">
+    <div class="box">
+        <div class="left-bar"><span class="fa fa-cloud-download"></span>
+            <div class="menu-group"> <span class="fa">Test</span>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="top-bar"><span class="cloud">Status Check Dashboard</span>
+            </div>
+            <div class="content">
+                <div class="menu">
+                    <div class="search">
+                        <span>Failing: {{ total_fail }}</span>
+                        <br>
+                        <span>Pass: {{ total_pass }}</span>
+                    </div>
+                    <div class="list-info"><span>Servers: {{ server_total }}</span></div>
+                </div>
+            </div>
+            <div class="grid">
+                {% for key, value in failing_nodes_info.items() %}
+
+                <div class="cardfail">
+                    <div class="number"><span>{{ value.failed_tests_count }}</span></div>
+                    <div class="product-name"><span>{{ key }}</span></div>
+                    <div class="overlay">
+                        <div class="detail"><span><a href="{{ url_for('failed_node_info', node = key) }}">Details</a></span></span></div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% for key, value in passing_nodes_info.items() %}
+
+                <div class="cardpass">
+                    <div class="product-name"><span>{{ key }}</span></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
