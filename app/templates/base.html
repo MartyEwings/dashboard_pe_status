@@ -1,9 +1,72 @@
 <!DOCTYPE html>
-<title>PE Status Check Dashboard</title>
-<section class="content">
-    <h1>Status</h1>
-    <ul>
-        <li>Failing nodes: {{ failing_nodes }}</li>
-        <li>Passing nodes: {{ passing_nodes }}</li>
-    </ul>
-</section>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script type="application/javascript" src="{{ url_for('static',filename='scripts/rpie.js') }}"></script>
+</head>
+<div class="container">
+    <div class="box">
+        <div class="left-bar"><span class="fa fa-cloud-download"></span>
+            <div class="menu-group"> <span class="fa">Home</span>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="top-bar"><span class="cloud">Home</span>
+            </div>
+            <div class="grid">
+                <div class="false-For-Bottom-Text" style="padding-left: 10%; margin-top: 10%;">
+                    <div class="mypiechart">
+                        <canvas id="passing" width="10%" height="10%"></canvas>
+                    </div>
+                    <div style="text-align: center; color: #000000; font-size: large;">Total Passing Nodes</div>
+                </div>
+                <div class="false-For-Bottom-Text" style="padding-left: 10%; margin-top: 10%;">
+                    <div class="mypiechart">
+                        <canvas id="failing" width="10%" height="10%"></canvas>
+                    </div>
+                    <div style="text-align: center; color: #000000; font-size: large;">Total Failed Nodes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var pass = {
+        pie: 'stroke',
+        values: ['{{ passing_nodes }}'],
+        colors: ['green'],
+        isStrokePie: {
+            stroke: 20,
+            overlayStroke: true,
+            overlayStrokeColor: '#eee',
+            strokeStartEndPoints: 'Yes',
+            strokeAnimation: true,
+            strokeAnimationSpeed: 40,
+            fontSize: '60px',
+            textAlignement: 'center',
+            fontFamily: 'Arial',
+            fontWeight: 'bold'
+        }
+    };
+    generatePieGraph('passing', pass);
+
+    var fail = {
+        pie: 'stroke',
+        values: ['{{ failing_nodes }}'],
+        colors: ['red'],
+        isStrokePie: {
+            stroke: 20,
+            overlayStroke: true,
+            overlayStrokeColor: '#eee',
+            strokeStartEndPoints: 'Yes',
+            strokeAnimation: true,
+            strokeAnimationSpeed: 40,
+            fontSize: '60px',
+            textAlignement: 'center',
+            fontFamily: 'Arial',
+            fontWeight: 'bold'
+        }
+    };
+    generatePieGraph('failing', fail);
+</script>
