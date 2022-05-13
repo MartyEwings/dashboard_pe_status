@@ -1,1 +1,59 @@
-{"nodes": {"details": {"pe-psql-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal": {"failed_tests_count": 0, "passing_tests_count": 14, "failed_tests_details": []}, "pe-psql-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal": {"failed_tests_count": 0, "passing_tests_count": 14, "failed_tests_details": []}, "pe-server-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal": {"failed_tests_count": 2, "passing_tests_count": 31, "failed_tests_details": ["S0022 Determines if there is a valid Puppet Enterprise license in place at /etc/puppetlabs/license.key on your primary which is not going to expire in the next 90 days", "S0035 Determines if puppet module list is returning any warnings"]}, "pe-server-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal": {"failed_tests_count": 1, "passing_tests_count": 25, "failed_tests_details": ["S0035 Determines if puppet module list is returning any warnings"]}, "pe-compiler-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal": {"failed_tests_count": 1, "passing_tests_count": 24, "failed_tests_details": ["S0035 Determines if puppet module list is returning any warnings"]}, "pe-compiler-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal": {"failed_tests_count": 1, "passing_tests_count": 24, "failed_tests_details": ["S0035 Determines if puppet module list is returning any warnings"]}}, "failing": ["pe-compiler-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal", "pe-server-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal", "pe-compiler-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal", "pe-server-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal"], "passing": ["pe-psql-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal", "pe-psql-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal"]}, "errors": {}, "status": "failing", "failing_node_count": 4, "passing_node_count": 2}
+{
+    "nodes": {
+        "details": {
+            "pe-psql-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal": {
+                "failed_tests_count": 0,
+                "passing_tests_count": 14,
+                "failed_tests_details": []
+            },
+            "pe-psql-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal": {
+                "failed_tests_count": 0,
+                "passing_tests_count": 14,
+                "failed_tests_details": []
+            },
+            "pe-server-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal": {
+                "failed_tests_count": 2,
+                "passing_tests_count": 31,
+                "failed_tests_details": [
+                    "S0022 Determines if there is a valid Puppet Enterprise license in place at /etc/puppetlabs/license.key on your primary which is not going to expire in the next 90 days",
+                    "S0035 Determines if puppet module list is returning any warnings"
+                ]
+            },
+            "pe-server-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal": {
+                "failed_tests_count": 1,
+                "passing_tests_count": 25,
+                "failed_tests_details": [
+                    "S0035 Determines if puppet module list is returning any warnings"
+                ]
+            },
+            "pe-compiler-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal": {
+                "failed_tests_count": 1,
+                "passing_tests_count": 24,
+                "failed_tests_details": [
+                    "S0035 Determines if puppet module list is returning any warnings"
+                ]
+            },
+            "pe-compiler-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal": {
+                "failed_tests_count": 1,
+                "passing_tests_count": 24,
+                "failed_tests_details": [
+                    "S0035 Determines if puppet module list is returning any warnings"
+                ]
+            }
+        },
+        "failing": [
+            "pe-compiler-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal",
+            "pe-server-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal",
+            "pe-compiler-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal",
+            "pe-server-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal"
+        ],
+        "passing": [
+            "pe-psql-9347bc-1.us-west1-b.c.customer-support-scratchpad.internal",
+            "pe-psql-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal"
+        ]
+    },
+    "errors": {},
+    "status": "failing",
+    "failing_node_count": 4,
+    "passing_node_count": 2
+}

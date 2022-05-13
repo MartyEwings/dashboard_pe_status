@@ -1,9 +1,10 @@
+import logging
 import datetime
+from distutils.log import error
 import json, os, requests
 from os.path import exists
 from time import sleep
 from flask import Flask, render_template
-from dateutil.parser import *
 
 
 app = Flask(__name__)
@@ -23,8 +24,9 @@ def home():
 # Failing nodes
 @app.route("/failing")
 def failing():
-    failing_nodes = failing_info()
-    return render_template('failing.html', failing=failing_nodes)
+    failed_info = failing_info()
+    data = parse()
+    return render_template('failing.html',  failing_nodes_info=failed_info)
 
 @app.route("/failed_node_info/<string:node>", methods=['GET'])
 def failed_node_info(node):
@@ -41,17 +43,19 @@ def all():
     total = len(failed_info) + len(passed_info)
     failing = round(failing / total * 100)
     passing = round(passing / total * 100)
+
     return render_template('all.html', server_total=total, failing_nodes_info=failed_info, passing_nodes_info=passed_info, total_pass=len(passed_info), total_fail=len(failed_info), failing_nodes=failing, passing_nodes=passing)
 
 def parse():
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     json_route = os.path.join(SITE_ROOT, "data", "pe_status.json")
+
     if exists(json_route):
         # check when the file was last modified
         last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(json_route))
         now = datetime.datetime.now()
         delta = now - last_modified
-        if delta.seconds > 600:
+        if delta.seconds > 6000000:
             data = update()
             with open(json_route, 'w') as outfile:
                 json.dump(data, outfile)
@@ -60,7 +64,7 @@ def parse():
         data = update()
         with open(json_route, 'w') as f:
             json.dump(data, f)
-            
+
     json_file = open(json_route, 'r')
     data = json.load(json_file)
     return data
