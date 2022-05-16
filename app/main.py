@@ -88,7 +88,6 @@ def passing_info():
 # Send a request to the orchestrator to run pe_status_check::infra_summary and wait for the data to be returned
 def update():
     host = str(sys.argv[1])+":"+str(sys.argv[2])
-    # port = sys.argv[2]
     url = "{}/orchestrator/v1/command/plan_run".format(host)
     token = "AOBtvBy9wvO-RfmY3pu17EoAFbtjKceYznC_Y3_-O0cC"
     headers = {'X-Authentication': token, 'Content-Type': 'application/json'}
