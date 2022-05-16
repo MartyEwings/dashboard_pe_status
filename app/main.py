@@ -89,7 +89,7 @@ def passing_info():
 def update():
     host = str(sys.argv[1])+":"+str(sys.argv[2])
     url = "{}/orchestrator/v1/command/plan_run".format(host)
-    token = "AOBtvBy9wvO-RfmY3pu17EoAFbtjKceYznC_Y3_-O0cC"
+    token = str(sys.argv[3])
     headers = {'X-Authentication': token, 'Content-Type': 'application/json'}
     response = requests.post(url, headers=headers, data='{ "plan_name" : "pe_status_check::infra_summary", "description" : "API call from bart", "params" : { } }', verify=False)
 
