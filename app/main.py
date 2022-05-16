@@ -1,7 +1,6 @@
-import logging
 import datetime
-from distutils.log import error
 import json, os, requests
+import sys
 from os.path import exists
 from time import sleep
 from flask import Flask, render_template
@@ -9,31 +8,8 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 # Homepage
 @app.route("/")
-def home():
-    data = parse()
-    failing = data["failing_node_count"]
-    passing = data["passing_node_count"]
-    total = failing + passing
-    failing = round(failing / total * 100)
-    passing = round(passing / total * 100)
-    return render_template('base.html', failing_nodes=failing, passing_nodes=passing, total=total)
-
-# Failing nodes
-@app.route("/failing")
-def failing():
-    failed_info = failing_info()
-    data = parse()
-    return render_template('failing.html',  failing_nodes_info=failed_info)
-
-@app.route("/failed_node_info/<string:node>", methods=['GET'])
-def failed_node_info(node):
-    data = failing_info(node)
-    return render_template('failed_node_info.html', node=node, failing_nodes_info=data)
-
-@app.route("/all")
 def all():
     failed_info = failing_info()
     passed_info = passing_info()
@@ -43,9 +19,24 @@ def all():
     total = len(failed_info) + len(passed_info)
     failing = round(failing / total * 100)
     passing = round(passing / total * 100)
-
     return render_template('all.html', server_total=total, failing_nodes_info=failed_info, passing_nodes_info=passed_info, total_pass=len(passed_info), total_fail=len(failed_info), failing_nodes=failing, passing_nodes=passing)
 
+# Failing nodes only
+@app.route("/failing")
+def failing():
+    failed_info = failing_info()
+    data = parse()
+    return render_template('failing.html',  failing_nodes_info=failed_info)
+
+# Failing nodes information
+@app.route("/failed_node_info/<string:node>", methods=['GET'])
+def failed_node_info(node):
+    data = failing_info(node)
+    return render_template('failed_node_info.html', node=node, failing_nodes_info=data)
+
+##### Functions #####
+
+# Parse the json file and return the data
 def parse():
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     json_route = os.path.join(SITE_ROOT, "data", "pe_status.json")
@@ -55,7 +46,7 @@ def parse():
         last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(json_route))
         now = datetime.datetime.now()
         delta = now - last_modified
-        if delta.seconds > 6000000:
+        if delta.seconds > 1:
             data = update()
             with open(json_route, 'w') as outfile:
                 json.dump(data, outfile)
@@ -69,6 +60,7 @@ def parse():
     data = json.load(json_file)
     return data
 
+# If node is passed, return the error codes/message for that specific node. If node is not passed, return all failing nodes.
 def failing_info(node=""):
     data = parse()
     failed = data["nodes"]["failing"]
@@ -82,6 +74,7 @@ def failing_info(node=""):
                 return_info[filter_node] = filter_nodes[filter_node]
     return return_info
 
+# Return information about all passing nodes
 def passing_info():
     data = parse()
     passing = data["nodes"]["passing"]
@@ -92,8 +85,10 @@ def passing_info():
             nodes_with_passing[filter_node] = filter_nodes[filter_node]
     return nodes_with_passing   
 
+# Send a request to the orchestrator to run pe_status_check::infra_summary and wait for the data to be returned
 def update():
-    host = "https://pe-server-9347bc-0.us-west1-a.c.customer-support-scratchpad.internal:8143"
+    host = str(sys.argv[1])+":"+str(sys.argv[2])
+    # port = sys.argv[2]
     url = "{}/orchestrator/v1/command/plan_run".format(host)
     token = "AOBtvBy9wvO-RfmY3pu17EoAFbtjKceYznC_Y3_-O0cC"
     headers = {'X-Authentication': token, 'Content-Type': 'application/json'}
@@ -113,4 +108,4 @@ def update():
     return data
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
